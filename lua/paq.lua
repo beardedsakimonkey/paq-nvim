@@ -277,7 +277,12 @@ local function register(args)
     elseif packages[name] then
         return
     end
-    local opt = (args.opt == nil or args.opt) and cfg.opt
+    local opt
+    if cfg.opt then
+        opt = args.opt == true or args.opt == nil
+    else
+        opt = args.opt
+    end
     local dir = cfg.path .. (opt and "opt/" or "start/") .. name
     packages[name] = {
         name = name,
